@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class WeatherCard extends StatelessWidget {
   final String locationCity;
   final String locationRegion;
-  final String temperature;
+  final int temperature;
   final String condition;
   final String wind;
   final String humidity;
@@ -30,7 +31,11 @@ class WeatherCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.25),
+        color: temperature > 20
+            ? Colors.yellowAccent.withOpacity(0.25)
+            : temperature < 20
+            ? Colors.lightBlueAccent.withOpacity(0.18)
+            : Colors.white.withOpacity(0.25),
         borderRadius: BorderRadius.circular(32),
         border: Border.all(color: Colors.white.withOpacity(0.28), width: 1.2),
         boxShadow: [
@@ -98,7 +103,7 @@ class WeatherCard extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: temperature,
+                          text: '$temperature',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 72,
@@ -135,7 +140,23 @@ class WeatherCard extends StatelessWidget {
                   color: Colors.white.withOpacity(0.22),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(largeIcon, color: Colors.white, size: 68),
+                child: temperature > 20
+                    ? Icon(
+                        WeatherIcons.sunrise,
+                        color: Colors.yellow.withOpacity(.85),
+                        size: 68,
+                      )
+                    : temperature < 20
+                    ? Icon(
+                        WeatherIcons.rain_wind,
+                        color: Colors.lightBlue.withOpacity(.85),
+                        size: 68,
+                      )
+                    : Icon(
+                        WeatherIcons.day_haze,
+                        color: Colors.white,
+                        size: 68,
+                      ),
               ),
             ],
           ),

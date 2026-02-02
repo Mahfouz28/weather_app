@@ -1,5 +1,6 @@
 // lib/widgets/daily_forecast_card.dart
 import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class DailyForecastCard extends StatelessWidget {
   final String dayName;
@@ -23,7 +24,11 @@ class DailyForecastCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.25),
+        color: averageTemp > 20
+            ? Colors.yellowAccent.withOpacity(0.25)
+            : averageTemp < 20
+            ? Colors.lightBlueAccent.withOpacity(0.18)
+            : Colors.white.withOpacity(0.25),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: Colors.white.withOpacity(0.28), width: 1.2),
         boxShadow: [
@@ -68,11 +73,23 @@ class DailyForecastCard extends StatelessWidget {
                   color: Colors.white.withOpacity(0.22),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  _getIconFromString(averageTemp),
-                  color: Colors.white,
-                  size: 32,
-                ),
+                child: averageTemp > 20
+                    ? Icon(
+                        WeatherIcons.sunrise,
+                        color: Colors.yellow.withOpacity(.85),
+                        size: 32,
+                      )
+                    : averageTemp < 20
+                    ? Icon(
+                        WeatherIcons.rain_wind,
+                        color: Colors.lightBlue.withOpacity(.85),
+                        size: 32,
+                      )
+                    : Icon(
+                        WeatherIcons.day_haze,
+                        color: Colors.white,
+                        size: 32,
+                      ),
               ),
               const SizedBox(width: 16),
               Column(
@@ -146,14 +163,5 @@ class DailyForecastCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  IconData _getIconFromString(int averageTemp) {
-    if (averageTemp > 20) {
-      return Icons.wb_sunny_outlined;
-    } else if (averageTemp < 20) {
-      return Icons.cloud_outlined;
-    }
-    return Icons.wb_sunny_outlined;
   }
 }

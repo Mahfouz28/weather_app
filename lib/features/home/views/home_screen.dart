@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                 const WeatherCard(
                   locationCity: 'San Francisco',
                   locationRegion: 'California, USA',
-                  temperature: '24',
+                  temperature: 12,
                   condition: 'Partly Cloudy',
                   wind: '12 km/h',
                   humidity: '65%',
