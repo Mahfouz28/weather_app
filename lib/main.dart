@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
 import 'core/theme/app_theme.dart';
-import 'core/localization/localization_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -25,15 +24,7 @@ void main() async {
     ),
   );
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: LocalizationManager.supportedLocales,
-      path: LocalizationManager.translationsPath,
-      fallbackLocale: LocalizationManager.fallbackLocale,
-      startLocale: LocalizationManager.fallbackLocale,
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
